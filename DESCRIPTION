@@ -7,11 +7,9 @@ Date: 2013-12-20
 Author: Sylvain Mareschal
 Maintainer: Sylvain Mareschal <maressyl@gmail.com>
 URL: http://bioinformatics.ovsa.fr/LPS
+BugReports: https://github.com/maressyl/R.LPS
 Description: This package provides functions implementing the Linear Predictor Score approach, as initiated by Radmacher et al. (J Comput Biol 2001) and enhanced by Wright et al. (PNAS 2003). Given a set of continuous variables (typically gene expression values), it builds a simple score able to retrieve previously defined classes.
+License: GPL (>= 3)
 Depends: stats, methods, R (>= 2.10)
 Suggests: limma
-License: GPL (>= 3)
-Packaged: 2013-12-20 12:00:40 UTC; root
 NeedsCompilation: no
-Repository: CRAN
-Date/Publication: 2013-12-20 13:35:17

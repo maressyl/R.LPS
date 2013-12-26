@@ -1,5 +1,11 @@
 \name{LPS-news}
 \title{LPS package NEWS}
+\section{Changes in version ... (...)}{
+  \itemize{
+    \item{README.md and LICENSE files added.}
+    \item{BugReports section added to DESCRIPTION.}
+  }
+}
 \section{Changes in version 1.0.4 (2013-12-20)}{
   \itemize{
     \item{Reference added to LPS manual page.}
