@@ -1,11 +1,12 @@
 \name{LPS-news}
 \title{LPS package NEWS}
-\section{Changes in version 1.0.10 (2015-02-06)}{
+\section{Changes in version 1.0.10 (2015-02-15)}{
   \itemize{
     \item{'title' argument added to heat.scale().}
     \item{'mai.top' is now used in heat.map() also without 'side'.}
     \item{Default value for 'side.col' updated in heat.map() and relatives.}
     \item{README and LICENSE files added.}
+    \item{Minor DESCRIPTION file updates to comply with new CRAN policies.}
   }
 }
 \section{Changes in version 1.0.9 (2014-12-17)}{
