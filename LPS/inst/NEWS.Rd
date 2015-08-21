@@ -1,5 +1,10 @@
 \name{LPS-news}
 \title{LPS package NEWS}
+\section{Changes in version 1.0.11 (2015-08-21)}{
+  \itemize{
+    \item{Dependencies and NAMESPACE updated to comply with new policy.}
+  }
+}
 \section{Changes in version 1.0.10 (2015-02-15)}{
   \itemize{
     \item{'title' argument added to heat.scale().}
