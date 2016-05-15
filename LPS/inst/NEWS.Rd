@@ -1,5 +1,10 @@
 \name{LPS-news}
 \title{LPS package NEWS}
+\section{Changes in version 1.0.12 (2016-05-15)}{
+  \itemize{
+    \item{plot.LPS() no longer merges multiples gray zones into a single one.}
+  }
+}
 \section{Changes in version 1.0.11 (2015-08-21)}{
   \itemize{
     \item{Dependencies and NAMESPACE updated to comply with new policy.}

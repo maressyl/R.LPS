@@ -59,9 +59,9 @@ plot.LPS <- function(
 	}
 	
 	# Plot (yaxt handled manually)
-	plot(x=xval, y=yval1, type=type, col=col.classes[1], xlim=xlim, ylim=ylim, yaxt="n", xlab=xlab, ylab=ylab, las=las, lwd=lwd, ...)
+	plot(x=xval, y=yval1, type=type, col=col.classes[1], xlim=xlim, ylim=ylim, yaxt="n", xlab=xlab, ylab=ylab, las=las, lwd=lwd)
 	par(new=TRUE)
-	plot(x=xval, y=yval2, type=type, col=col.classes[2], xlim=xlim, ylim=ylim, yaxt="n", xlab="",   ylab="",   las=las, lwd=lwd, ...)
+	plot(x=xval, y=yval2, type=type, col=col.classes[2], xlim=xlim, ylim=ylim, yaxt="n", xlab="",   ylab="",   las=las, lwd=lwd)
 	
 	# Radmacher's means
 	if(method == "Radmacher") {
@@ -71,21 +71,24 @@ plot.LPS <- function(
 	
 	# Gray zone (score thresholds)
 	if(!is.na(threshold) & method != "Radmacher") {
+		# Predict, if not already done
 		if(y == "density") p <- predict(x, newdata=xval, type="probability", method=method, plot=FALSE)
-		if(p[1,1] < p[nrow(p),1]) {
-			grayzone <- c(
-				mean(xval[  0:1 + tail(which(p[,1] < threshold), 1) ]),
-				mean(xval[ -1:0 + head(which(p[,2] < threshold), 1) ])
-			)
-		} else {
-			grayzone <- c(
-				mean(xval[  0:1 + tail(which(p[,2] < threshold), 1) ]),
-				mean(xval[ -1:0 + head(which(p[,1] < threshold), 1) ])
-			)
+		
+		# Estimate unclassified regions
+		grayPoints <- rle(p[,1] < threshold & p[,2] < threshold)
+		grayBreaks <- c(1, cumsum(grayPoints$lengths))
+		
+		# Plot
+		for(i in which(grayPoints$values)) {
+			# X coordinates
+			left <- xval[ grayBreaks[i] ]
+			right <- xval[ grayBreaks[i+1] ]
+			
+			# Plot
+			rect(xleft=left, xright=right, ybottom=-1, ytop=1, col="#00000033", border=NA)
+			mtext(text=sprintf("%.3f", c(left, right)), at=c(left, right), side=1)
+			mtext(text=sprintf("p < %g%%", threshold*100), at=(left+right)/2, side=3)
 		}
-		rect(xleft=min(grayzone), xright=max(grayzone), ybottom=-1, ytop=1, col="#00000033", border=NA)
-		mtext(text=sprintf("%.3f", grayzone), at=grayzone, side=1)
-		mtext(text=sprintf("p < %g%%", threshold*100), at=mean(grayzone), side=3)
 	}
 	
 	# Values
