@@ -12,7 +12,8 @@
   heat.map(expr, side = NULL, cex.col = NA, cex.row = NA, mai.left = NA,
     mai.bottom = NA, mai.right = 0.1, mai.top = 0.1, side.height = 1, side.col = NULL,
     col.heatmap = heat(), zlim = "0 centered", norm = c("rows", "columns", "none"),
-    norm.robust = FALSE, customLayout = FALSE, getLayout = FALSE, font = c(1, 3))
+    norm.robust = FALSE, customLayout = FALSE, getLayout = FALSE, font = c(1, 3),
+    xaxt = "s", yaxt = "s")
 }
 
 \arguments{
@@ -66,6 +67,12 @@
 }
   \item{font}{
    Integer vector of length two, the \code{font} used to draw X and Y axis labels respectively (see \code{\link{par}}). Default is to print X labels (usually samples) in normal font and Y labels (usually genes) in italic font.
+}
+  \item{xaxt}{
+   Single letter, whether to print column labels ("s") or not ("n").
+}
+  \item{yaxt}{
+   Single letter, whether to print row labels ("s") or not ("n").
 }
 }
 

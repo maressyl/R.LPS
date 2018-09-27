@@ -1,5 +1,10 @@
 \name{LPS-news}
 \title{LPS package NEWS}
+\section{Changes in version 1.0.13 (2016-10-07)}{
+  \itemize{
+    \item{'xaxt' and 'yaxt' arguments added to heat.map().}
+  }
+}
 \section{Changes in version 1.0.12 (2016-05-15)}{
   \itemize{
     \item{plot.LPS() no longer merges multiples gray zones into a single one.}

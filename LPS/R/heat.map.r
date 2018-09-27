@@ -17,7 +17,9 @@ heat.map <- function(
 	norm.robust = FALSE,
 	customLayout = FALSE,
 	getLayout = FALSE,
-	font = c(1, 3)
+	font = c(1, 3),
+	xaxt = "s",
+	yaxt = "s"
 	) {
 	# Arg check
 	norm <- match.arg(norm)
@@ -143,8 +145,8 @@ heat.map <- function(
 	# Heatmap (bottom)
 	par(mai=c(mai.bottom, mai.left, mai.top, mai.right))
 	image(expr, xaxt="n", yaxt="n", col=col.heatmap, zlim=zlim)
-	axis(side=1, at=(1:nrow(expr) - 1L) / (nrow(expr) - 1L), labels=rownames(expr), las=2, cex.axis=cex.col, tick=FALSE, line=-0.5, font=font[1])
-	axis(side=2, at=(1:ncol(expr) - 1L) / (ncol(expr) - 1L), labels=colnames(expr), las=2, cex.axis=cex.row, tick=FALSE, line=-0.5, font=font[2])
+	if(xaxt == "s") axis(side=1, at=(1:nrow(expr) - 1L) / (nrow(expr) - 1L), labels=rownames(expr), las=2, cex.axis=cex.col, tick=FALSE, line=-0.5, font=font[1])
+	if(yaxt == "s") axis(side=2, at=(1:ncol(expr) - 1L) / (ncol(expr) - 1L), labels=colnames(expr), las=2, cex.axis=cex.row, tick=FALSE, line=-0.5, font=font[2])
 	box()
 	
 	# Invisibly return parameters for heatScale()
