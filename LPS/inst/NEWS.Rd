@@ -1,5 +1,10 @@
 \name{LPS-news}
 \title{LPS package NEWS}
+\section{Changes in version 1.0.13 (2019-02-08)}{
+  \itemize{
+    \item{heat.map() side color palette fixed when there are 8 classes.}
+  }
+}
 \section{Changes in version 1.0.13 (2016-10-07)}{
   \itemize{
     \item{'xaxt' and 'yaxt' arguments added to heat.map().}

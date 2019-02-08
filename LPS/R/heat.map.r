@@ -71,7 +71,7 @@ heat.map <- function(
 			if(is.null(side.col)) {
 				# Default palettes
 				if(length(val.side) > 8) { pal.side <- rainbow(n=length(val.side), v=0.8)
-				} else                   { pal.side <- c("#2a80b9", "#c1392b", "#f39c11", "#52be80", "#c185db", "#fee203", "#bec3c7")[1:length(val.side)]
+				} else                   { pal.side <- c("#2a80b9", "#c1392b", "#f39c11", "#52be80", "#c185db", "#fee203", "#bec3c7", "#333333")[1:length(val.side)]
 				}
 			} else {
 				# Custom function
