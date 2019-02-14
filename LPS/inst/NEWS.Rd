@@ -1,8 +1,9 @@
 \name{LPS-news}
 \title{LPS package NEWS}
-\section{Changes in version 1.0.13 (2019-02-08)}{
+\section{Changes in version 1.0.14 (2019-02-14)}{
   \itemize{
     \item{heat.map() side color palette fixed when there are 8 classes.}
+    \item{'clust.genes' and 'clust.samples' arguments added to clusterize().}
   }
 }
 \section{Changes in version 1.0.13 (2016-10-07)}{

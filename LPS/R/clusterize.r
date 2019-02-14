@@ -24,7 +24,9 @@ clusterize <- function(
 	order.genes = NULL,
 	order.samples = NULL,
 	fun.dist = dist.COR,
-	fun.hclust = hclust.ward
+	fun.hclust = hclust.ward,
+	clust.genes = NULL,
+	clust.samples = NULL
 	) {
 	# Arg check
 	norm <- match.arg(norm)
@@ -64,15 +66,15 @@ clusterize <- function(
 	}
 	
 	# Clustering
-	clustGenes <- as.dendrogram(fun.hclust(fun.dist(t(expr))))
-	clustSamples <- as.dendrogram(fun.hclust(fun.dist(expr)))
+	if(is.null(clust.genes))   clust.genes <- as.dendrogram(fun.hclust(fun.dist(t(expr))))
+	if(is.null(clust.samples)) clust.samples <- as.dendrogram(fun.hclust(fun.dist(expr)))
 	
 	# Custom tree reordering
-	if(is.function(order.genes))   clustGenes <- order.genes(clustGenes, expr)
-	if(is.function(order.samples)) clustSamples <- order.samples(clustSamples, expr)
+	if(is.function(order.genes))   clust.genes <- order.genes(clust.genes, expr)
+	if(is.function(order.samples)) clust.samples <- order.samples(clust.samples, expr)
 	
 	# Synchronize tree and table orders ('side' will be ordered according to 'expr' row names in heat.map())
-	expr <- expr[ labels(clustSamples) , labels(clustGenes) ]
+	expr <- expr[ labels(clust.samples) , labels(clust.genes) ]
 	
 	if(isTRUE(plot)) {
 		# Layout call
@@ -102,11 +104,11 @@ clusterize <- function(
 		
 		# Sample tree (top right)
 		par(mai=c(0, out$mai.left, mai.top, mai.right))
-		plot(clustSamples, leaflab="none", xaxs="i", yaxs="i", yaxt="n")
+		plot(clust.samples, leaflab="none", xaxs="i", yaxs="i", yaxt="n")
 		
 		# Gene tree (bottom left)
 		par(mai=c(out$mai.bottom, 0.1, 0.1, 0))
-		plot(clustGenes, leaflab="none", xaxs="i", yaxs="i", yaxt="n", horiz=TRUE)
+		plot(clust.genes, leaflab="none", xaxs="i", yaxs="i", yaxt="n", horiz=TRUE)
 		
 		# Legend (top+middle left)
 		if(length(out$legend) > 0) {
@@ -120,8 +122,8 @@ clusterize <- function(
 	}
 	
 	# Invisibly return parameters for heatScale()
-	out$genes <- clustGenes
-	out$samples <- clustSamples
+	out$genes <- clust.genes
+	out$samples <- clust.samples
 	invisible(out)
 }
 

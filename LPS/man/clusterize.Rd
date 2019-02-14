@@ -20,7 +20,8 @@
     col.heatmap = heat(), zlim = "0 centered", norm = c("rows", "columns", "none"),
     norm.clust = TRUE, norm.robust = FALSE, customLayout = FALSE, getLayout = FALSE,
     plot = TRUE, widths = c(1, 4), heights = c(1, 4), order.genes = NULL,
-    order.samples = NULL, fun.dist = dist.COR, fun.hclust = hclust.ward)
+    order.samples = NULL, fun.dist = dist.COR, fun.hclust = hclust.ward,
+    clust.genes = NULL, clust.samples = NULL)
   dist.COR(input)
   hclust.ward(input)
 }
@@ -97,6 +98,12 @@
 }
   \item{fun.hclust}{
     A function to be used for agglomeration in clustering. See \code{\link{hclust}} for further details.
+}
+  \item{clust.genes}{
+    If not \code{NULL}, an object coercible to the \code{dendrogram} class (typically the output from \code{hclust()}) to use instead of a fresh hierarchical clustering of genes.
+}
+  \item{clust.samples}{
+    If not \code{NULL}, an object coercible to the \code{dendrogram} class (typically the output from \code{hclust()}) to use instead of a fresh hierarchical clustering of samples.
 }
   \item{input}{
     See \code{\link{hclust}} and \code{\link{dist}} respectively for further details.
