@@ -13,6 +13,7 @@ clusterize <- function(
 	side.col = NULL,                       # heat.map()
 	col.heatmap = heat(),                  # heat.map()
 	zlim = "0 centered",                   # heat.map()
+	zlim.trim = 0.02,                      # heat.map()
 	norm = c("rows", "columns", "none"),   # heat.map()
 	norm.clust = TRUE,
 	norm.robust = FALSE,                   # heat.map()
@@ -100,6 +101,7 @@ clusterize <- function(
 			side.col = side.col,
 			col.heatmap = col.heatmap,
 			zlim = zlim,
+			zlim.trim = zlim.trim,
 			norm = ifelse(isTRUE(norm.clust), "none", norm),
 			norm.robust = norm.robust
 		)
