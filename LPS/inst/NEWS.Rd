@@ -4,6 +4,7 @@
   \itemize{
     \item{heat.map() side color palette fixed when there are 8 classes.}
     \item{'clust.genes' and 'clust.samples' arguments added to clusterize().}
+    \item{'zlim.trim' argument added to heat.map() (previous behavior corresponded to zlim.trim = 0).}
   }
 }
 \section{Changes in version 1.0.13 (2016-10-07)}{

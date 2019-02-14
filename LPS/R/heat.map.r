@@ -13,6 +13,7 @@ heat.map <- function(
 	side.col = NULL,
 	col.heatmap = heat(),
 	zlim = "0 centered",   # or "range", or numeric(2)
+	zlim.trim = 0.02,
 	norm = c("rows", "columns", "none"),
 	norm.robust = FALSE,
 	customLayout = FALSE,
@@ -106,10 +107,10 @@ heat.map <- function(
 	
 	# Symmetrical palette around 0
 	if(identical(zlim, "0 centered")) {
-		zlim <- max(abs(min(expr, na.rm=TRUE)), max(expr, na.rm=TRUE), na.rm=TRUE)
+		zlim <- max(abs(quantile(expr, probs=c(zlim.trim/2L, 1L-zlim.trim/2L), na.rm=TRUE)))
 		zlim <- c(-zlim, zlim)
 	} else if(identical(zlim, "range")) {
-		zlim <- range(expr, na.rm=TRUE)
+		zlim <- quantile(expr, probs=c(zlim.trim/2L, 1L-zlim.trim/2L), na.rm=TRUE)
 	}
 	
 	# Apply ceiling

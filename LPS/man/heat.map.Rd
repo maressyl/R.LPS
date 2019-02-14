@@ -11,9 +11,9 @@
 \usage{
   heat.map(expr, side = NULL, cex.col = NA, cex.row = NA, mai.left = NA,
     mai.bottom = NA, mai.right = 0.1, mai.top = 0.1, side.height = 1, side.col = NULL,
-    col.heatmap = heat(), zlim = "0 centered", norm = c("rows", "columns", "none"),
-    norm.robust = FALSE, customLayout = FALSE, getLayout = FALSE, font = c(1, 3),
-    xaxt = "s", yaxt = "s")
+    col.heatmap = heat(), zlim = "0 centered", zlim.trim = 0.02,
+    norm = c("rows", "columns", "none"), norm.robust = FALSE, customLayout = FALSE,
+    getLayout = FALSE, font = c(1, 3), xaxt = "s", yaxt = "s")
 }
 
 \arguments{
@@ -52,6 +52,9 @@
 }
   \item{zlim}{
     Numeric vector of length two, defining minimal and maximal \code{expr} values that will be mapped to colors in \code{col.heatmap}. Values outside of this range will be rounded to the mearest boundary. Two special values are also allowed : "0 centered" to get a symetrical range around 0 (with the default palette, it enforces 0 as the center color), and "range" to get \code{expr} range after normalization.
+}
+  \item{zlim.trim}{
+    Single numeric value between 0 and 1, defining the proportion of extreme values (equally split on both sides) to remove before computing "0 centered" or "range" \code{zlim}.
 }
   \item{norm}{
     Single character value, normalization to be performed (use "none" to perform no normalization). "rows" will center and scale genes, while "columns" will center and scale samples. The functions used depend on \code{norm.robust}.
