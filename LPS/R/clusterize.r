@@ -65,9 +65,11 @@ clusterize <- function(
 		}
 	}
 	
-	# Clustering
-	if(is.null(clust.genes))   clust.genes <- as.dendrogram(fun.hclust(fun.dist(t(expr))))
-	if(is.null(clust.samples)) clust.samples <- as.dendrogram(fun.hclust(fun.dist(expr)))
+	# Clusterings
+	if(is.null(clust.genes))   clust.genes <- fun.hclust(fun.dist(t(expr)))
+	if(is.null(clust.samples)) clust.samples <- fun.hclust(fun.dist(expr))
+	clust.genes <- as.dendrogram(clust.genes)
+	clust.samples <- as.dendrogram(clust.samples)
 	
 	# Custom tree reordering
 	if(is.function(order.genes))   clust.genes <- order.genes(clust.genes, expr)
