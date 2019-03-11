@@ -118,7 +118,9 @@ clusterize <- function(
 		if(length(out$legend) > 0) {
 			par(mai=c(0.1, 0.1, mai.top, 0.1), xpd=NA)
 			plot(x=NA, y=NA, xlim=0:1, ylim=0:1, xaxt="n", yaxt="n", xaxs="i", yaxs="i", bty="n", xlab="", ylab="")
-			legend(x="topleft", legend=names(out$legend), fill=out$legend, bg="#EEEEEE")
+			val <- paste(rep(names(rev(out$legend)), sapply(rev(out$legend), length)), unlist(lapply(rev(out$legend), names)), sep=" : ")
+			col <- unlist(rev(out$legend))
+			legend(x="topleft", legend=val, fill=col, bg="#EEEEEE")
 		}
 	} else {
 		# No graphical parameter to return without plot

@@ -59,31 +59,33 @@ heat.map <- function(
 		
 		# To reverted matrix
 		side <- as.matrix(side)
-		side <- side[ rownames(expr) , , drop=FALSE ]
-		side <- side[ , ncol(side):1 , drop=FALSE ]
+		side <- side[ rownames(expr) , ncol(side):1 , drop=FALSE ]
 		
-		# Values to color (ignore custom hexadecimal colors)
-		val.side <- unique(as.character(side))
-		val.side <- sort(val.side[ !is.na(val.side) ])
-		val.side <- grep("^#([0-9A-Fa-f]{2}){3,4}$", val.side, invert=TRUE, value=TRUE)
-		
-		# Attribute colors to values
-		if(length(val.side) > 0) {
-			if(is.null(side.col)) {
-				# Default palettes
-				if(length(val.side) > 8) { pal.side <- rainbow(n=length(val.side), v=0.8)
-				} else                   { pal.side <- c("#2a80b9", "#c1392b", "#f39c11", "#52be80", "#c185db", "#fee203", "#bec3c7", "#333333")[1:length(val.side)]
-				}
-			} else {
-				# Custom function
-				pal.side <- side.col(length(val.side))
-			}
+		# Attribute colors column-wise
+		pal.side <- list()
+		for(k in colnames(side)) {
+			# Unique values (no custom colors)
+			val <- unique(as.character(side[,k]))
+			val <- sort(val[ !is.na(val) & !grepl("^#([0-9A-Fa-f]{2}){3,4}$", val) ])
 			
-			# Use value as name
-			names(pal.side) <- val.side
-		} else {
-			# Empty legend (if only custom colors are provided)
-			pal.side <- character(0)
+			# Attribute colors to values
+			if(length(val) > 0) {
+				if(is.null(side.col)) {
+					# Default palettes
+					if(length(val) > 8L) { pal.side[[k]] <- rainbow(n=length(val), v=0.8)
+					} else               { pal.side[[k]] <- c("#2a80b9", "#c1392b", "#f39c11", "#52be80", "#c185db", "#fee203", "#bec3c7", "#333333")[1:length(val)]
+					}
+				} else {
+					# Custom function
+					pal.side[[k]] <- side.col(length(val))
+				}
+				
+				# Use value as name
+				names(pal.side[[k]]) <- val
+			} else {
+				# Empty legend (if only custom colors are provided)
+				pal.side[[k]] <- character(0)
+			}
 		}
 	}
 
@@ -133,7 +135,7 @@ heat.map <- function(
 			# Annotation colors
 			col <- side[,k]
 			isCustom <- grepl("^#([0-9A-Fa-f]{2}){3,4}$", col)
-			col[!isCustom] <- pal.side[ col[!isCustom] ]
+			col[!isCustom] <- pal.side[[k]][ col[!isCustom] ]
 			
 			# Draws annotation boxes
 			rect(xleft=(1:nrow(expr))-0.5, xright=(1:nrow(expr))+0.5, ybottom=k-1L, ytop=k, col=col)
