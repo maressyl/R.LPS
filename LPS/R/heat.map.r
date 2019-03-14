@@ -1,3 +1,6 @@
+# Transform a continuous vector into shades of grey
+colorize <- function(x) grey(1L - (x - min(x)) / (max(x) - min(x)))
+
 # Mix image() and heatmap(), with multiple row annotation and distinct default values
 # Author : Sylvain Mareschal <maressyl@gmail.com>
 heat.map <- function(
@@ -58,33 +61,43 @@ heat.map <- function(
 		if(any(! rownames(expr) %in% rownames(side))) stop("All 'expr' row names must be in 'side' row names")
 		
 		# To reverted matrix
-		side <- as.matrix(side)
 		side <- side[ rownames(expr) , ncol(side):1 , drop=FALSE ]
 		
 		# Attribute colors column-wise
 		pal.side <- list()
 		for(k in colnames(side)) {
-			# Unique values (no custom colors)
-			val <- unique(as.character(side[,k]))
-			val <- sort(val[ !is.na(val) & !grepl("^#([0-9A-Fa-f]{2}){3,4}$", val) ])
-			
-			# Attribute colors to values
-			if(length(val) > 0) {
-				if(is.null(side.col)) {
-					# Default palettes
-					if(length(val) > 8L) { pal.side[[k]] <- rainbow(n=length(val), v=0.8)
-					} else               { pal.side[[k]] <- c("#2a80b9", "#c1392b", "#f39c11", "#52be80", "#c185db", "#fee203", "#bec3c7", "#333333")[1:length(val)]
-					}
-				} else {
-					# Custom function
-					pal.side[[k]] <- side.col(length(val))
-				}
+			if(is.numeric(side[[k]])) {
+				# Add extremes to legend
+				pal.side[[k]] <- c("#FFFFFF", "#000000")
+				names(pal.side[[k]]) <- sprintf("%s = %g", c("min", "max"), signif(range(side[[k]], na.rm=TRUE), 3))
 				
-				# Use value as name
-				names(pal.side[[k]]) <- val
+				# Add NAs if any
+				if(any(is.na(side[[k]]))) {
+					pal.side[[k]] <- c(pal.side[[k]], "NA"="#880000")
+				}
 			} else {
-				# Empty legend (if only custom colors are provided)
-				pal.side[[k]] <- character(0)
+				# Unique values (ignore custom colors and numeric columns)
+				val <- unique(as.character(side[,k]))
+				val <- sort(val[ !is.na(val) & !grepl("^#([0-9A-Fa-f]{2}){3,4}$", val) ])
+				
+				# Attribute colors to values
+				if(length(val) > 0) {
+					if(is.null(side.col)) {
+						# Default palettes
+						if(length(val) > 8L) { pal.side[[k]] <- rainbow(n=length(val), v=0.8)
+						} else               { pal.side[[k]] <- c("#2a80b9", "#c1392b", "#f39c11", "#52be80", "#c185db", "#fee203", "#bec3c7", "#333333")[1:length(val)]
+						}
+					} else {
+						# Custom function
+						pal.side[[k]] <- side.col(length(val))
+					}
+					
+					# Use value as name
+					names(pal.side[[k]]) <- val
+				} else {
+					# Empty legend (if only custom colors are provided)
+					pal.side[[k]] <- character(0)
+				}
 			}
 		}
 	}
@@ -133,9 +146,18 @@ heat.map <- function(
 		plot(x=NA, y=NA, xlim=c(0.5, nrow(expr)+0.5), ylim=c(0, ncol(side)), xaxs="i", yaxs="i", xaxt="n", yaxt="n", xlab="", ylab="")
 		for(k in 1:ncol(side)) {
 			# Annotation colors
-			col <- side[,k]
-			isCustom <- grepl("^#([0-9A-Fa-f]{2}){3,4}$", col)
-			col[!isCustom] <- pal.side[[k]][ col[!isCustom] ]
+			col <- side[[k]]
+			if(is.numeric(col)) {
+				# Represent numeric columns as grey shades
+				tmp <- rep(NA, length(col))
+				tmp[  is.na(col) ] <- "#880000"
+				tmp[ !is.na(col) ] <- colorize(col[ !is.na(col) ])
+				col <- tmp
+			} else {
+				# Use palette, or hexadecimal codes as is
+				isCustom <- grepl("^#([0-9A-Fa-f]{2}){3,4}$", col)
+				col[!isCustom] <- pal.side[[k]][ as.character(col[!isCustom]) ]
+			}
 			
 			# Draws annotation boxes
 			rect(xleft=(1:nrow(expr))-0.5, xright=(1:nrow(expr))+0.5, ybottom=k-1L, ytop=k, col=col)

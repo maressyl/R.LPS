@@ -1,9 +1,10 @@
 \name{LPS-news}
 \title{LPS package NEWS}
-\section{Changes in version 1.0.14 (2019-03-11)}{
+\section{Changes in version 1.0.14 (2019-03-14)}{
   \itemize{
     \item{heat.map() side color palette fixed when there are 8 classes.}
     \item{heat.map() now attributes colors separately to each 'side' column.}
+    \item{heat.map() now attributes grey shades to numeric columns in 'side'.}
     \item{'clust.genes' and 'clust.samples' arguments added to clusterize().}
     \item{'zlim.trim' argument added to heat.map() (previous behavior corresponded to zlim.trim = 0).}
   }
