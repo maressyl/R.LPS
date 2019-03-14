@@ -133,8 +133,8 @@ heat.map <- function(
 	expr[ expr > zlim[2] ] <- zlim[2]
 	
 	# Evolutive cex (from heatmap())
-	if(is.na(cex.col)) cex.col <- 0.2 + 1 / log10(nrow(expr))
-	if(is.na(cex.row)) cex.row <- 0.2 + 1 / log10(ncol(expr))
+	if(is.na(cex.col)) cex.col <- ifelse(nrow(expr) == 1L, 5, 0.2 + 1 / log10(nrow(expr)))
+	if(is.na(cex.row)) cex.row <- ifelse(ncol(expr) == 1L, 5, 0.2 + 1 / log10(ncol(expr)))
 	
 	# Evolutive margins
 	if(is.na(mai.left))   mai.left   <- max(strwidth(colnames(expr), units="inches", cex=cex.row)) + par("cin")[2]
@@ -170,8 +170,8 @@ heat.map <- function(
 	# Heatmap (bottom)
 	par(mai=c(mai.bottom, mai.left, mai.top, mai.right))
 	image(expr, xaxt="n", yaxt="n", col=col.heatmap, zlim=zlim)
-	if(xaxt == "s") axis(side=1, at=(1:nrow(expr) - 1L) / (nrow(expr) - 1L), labels=rownames(expr), las=2, cex.axis=cex.col, tick=FALSE, line=-0.5, font=font[1])
-	if(yaxt == "s") axis(side=2, at=(1:ncol(expr) - 1L) / (ncol(expr) - 1L), labels=colnames(expr), las=2, cex.axis=cex.row, tick=FALSE, line=-0.5, font=font[2])
+	if(xaxt == "s" && !is.null(rownames(expr))) axis(side=1, at=seq(from=0L, to=1L, length=nrow(expr)), labels=rownames(expr), las=2, cex.axis=cex.col, tick=FALSE, line=-0.5, font=font[1])
+	if(yaxt == "s" && !is.null(colnames(expr))) axis(side=2, at=seq(from=0L, to=1L, length=ncol(expr)), labels=colnames(expr), las=2, cex.axis=cex.row, tick=FALSE, line=-0.5, font=font[2])
 	box()
 	
 	# Invisibly return parameters for heatScale()

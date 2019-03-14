@@ -5,6 +5,7 @@
     \item{heat.map() side color palette fixed when there are 8 classes.}
     \item{heat.map() now attributes colors separately to each 'side' column.}
     \item{heat.map() now attributes grey shades to numeric columns in 'side'.}
+    \item{heat.map() now handles properly matrices with a single row or column.}
     \item{'clust.genes' and 'clust.samples' arguments added to clusterize().}
     \item{'zlim.trim' argument added to heat.map() (previous behavior corresponded to zlim.trim = 0).}
   }
