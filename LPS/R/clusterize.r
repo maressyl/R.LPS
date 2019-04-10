@@ -66,18 +66,33 @@ clusterize <- function(
 		}
 	}
 	
-	# Clusterings
-	if(is.null(clust.genes))   clust.genes <- fun.hclust(fun.dist(t(expr)))
-	if(is.null(clust.samples)) clust.samples <- fun.hclust(fun.dist(expr))
-	clust.genes <- as.dendrogram(clust.genes)
-	clust.samples <- as.dendrogram(clust.samples)
+	if(!isFALSE(clust.genes)) {
+		# Perform clustering
+		if(is.null(clust.genes)) clust.genes <- fun.hclust(fun.dist(t(expr)))
+		
+		# Coerce to dendrogram
+		clust.genes <- as.dendrogram(clust.genes)
+		
+		# Custom tree reordering
+		if(is.function(order.genes)) clust.genes <- order.genes(clust.genes, expr)
+		
+		# Synchronize tree and table orders ('side' will be ordered according to 'expr' row names in heat.map())
+		expr <- expr[, labels(clust.genes) ]
+	}
 	
-	# Custom tree reordering
-	if(is.function(order.genes))   clust.genes <- order.genes(clust.genes, expr)
-	if(is.function(order.samples)) clust.samples <- order.samples(clust.samples, expr)
-	
-	# Synchronize tree and table orders ('side' will be ordered according to 'expr' row names in heat.map())
-	expr <- expr[ labels(clust.samples) , labels(clust.genes) ]
+	if(!isFALSE(clust.samples)) {
+		# Perform clustering
+		if(is.null(clust.samples)) clust.samples <- fun.hclust(fun.dist(expr))
+		
+		# Coerce to dendrogram
+		clust.samples <- as.dendrogram(clust.samples)
+		
+		# Custom tree reordering
+		if(is.function(order.samples)) clust.samples <- order.samples(clust.samples, expr)
+		
+		# Synchronize tree and table orders ('side' will be ordered according to 'expr' row names in heat.map())
+		expr <- expr[ labels(clust.samples) ,]
+	}
 	
 	if(isTRUE(plot)) {
 		# Layout call
@@ -108,11 +123,15 @@ clusterize <- function(
 		
 		# Sample tree (top right)
 		par(mai=c(0, out$mai.left, mai.top, mai.right))
-		plot(clust.samples, leaflab="none", xaxs="i", yaxs="i", yaxt="n")
+		if(isFALSE(clust.samples)) { plot(x=NA, y=NA, xlim=0:1, ylim=0:1, xaxt="n", yaxt="n", bty="n", xlab="", ylab="")
+		} else                     { plot(clust.samples, leaflab="none", xaxs="i", yaxs="i", yaxt="n")
+		}
 		
 		# Gene tree (bottom left)
 		par(mai=c(out$mai.bottom, 0.1, 0.1, 0))
-		plot(clust.genes, leaflab="none", xaxs="i", yaxs="i", yaxt="n", horiz=TRUE)
+		if(isFALSE(clust.genes)) { plot(x=NA, y=NA, xlim=0:1, ylim=0:1, xaxt="n", yaxt="n", bty="n", xlab="", ylab="")
+		} else                   { plot(clust.genes, leaflab="none", xaxs="i", yaxs="i", yaxt="n", horiz=TRUE)
+		}
 		
 		# Legend (top+middle left)
 		if(length(out$legend) > 0) {

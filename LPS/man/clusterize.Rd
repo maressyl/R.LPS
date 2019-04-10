@@ -103,10 +103,10 @@
     A function to be used for agglomeration in clustering. See \code{\link{hclust}} for further details.
 }
   \item{clust.genes}{
-    If not \code{NULL}, an object coercible to the \code{dendrogram} class (typically the output from \code{hclust()}) to use instead of a fresh hierarchical clustering of genes.
+    If not \code{NULL}, an object coercible to the \code{dendrogram} class (typically the output from \code{hclust()}) to use instead of a fresh hierarchical clustering of genes. The \code{FALSE} value can also be used to disable computation and/or plotting of the dendrogram.
 }
   \item{clust.samples}{
-    If not \code{NULL}, an object coercible to the \code{dendrogram} class (typically the output from \code{hclust()}) to use instead of a fresh hierarchical clustering of samples.
+    If not \code{NULL}, an object coercible to the \code{dendrogram} class (typically the output from \code{hclust()}) to use instead of a fresh hierarchical clustering of samples. The \code{FALSE} value can also be used to disable computation and/or plotting of the dendrogram.
 }
   \item{input}{
     See \code{\link{hclust}} and \code{\link{dist}} respectively for further details.

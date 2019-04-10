@@ -8,6 +8,7 @@
     \item{heat.map() now handles properly matrices with a single row or column.}
     \item{'clust.genes' and 'clust.samples' arguments added to clusterize().}
     \item{'zlim.trim' argument added to heat.map() (previous behavior corresponded to zlim.trim = 0).}
+    \item{Dendrograms can now be disabled in clusterize().}
   }
 }
 \section{Changes in version 1.0.13 (2016-10-07)}{
