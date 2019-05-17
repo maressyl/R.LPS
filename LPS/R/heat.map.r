@@ -77,8 +77,13 @@ heat.map <- function(
 				}
 			} else {
 				# Unique values (ignore custom colors and numeric columns)
-				val <- unique(as.character(side[,k]))
-				val <- sort(val[ !is.na(val) & !grepl("^#([0-9A-Fa-f]{2}){3,4}$", val) ])
+				if(is.factor(side[,k])) {
+					val <- levels(side[,k])
+					side[,k] <- as.character(side[,k])
+				} else {
+					val <- unique(as.character(side[,k]))
+					val <- sort(val[ !is.na(val) & !grepl("^#([0-9A-Fa-f]{2}){3,4}$", val) ])
+				}
 				
 				# Attribute colors to values
 				if(length(val) > 0) {

@@ -1,8 +1,9 @@
 \name{LPS-news}
 \title{LPS package NEWS}
-\section{Changes in version 1.0.14 (2019-03-14)}{
+\section{Changes in version 1.0.14 (2019-05-17)}{
   \itemize{
     \item{heat.map() side color palette fixed when there are 8 classes.}
+    \item{heat.map() side now attributes a color even to unused factor levels.}
     \item{heat.map() now attributes colors separately to each 'side' column.}
     \item{heat.map() now attributes grey shades to numeric columns in 'side'.}
     \item{heat.map() now handles properly matrices with a single row or column.}
