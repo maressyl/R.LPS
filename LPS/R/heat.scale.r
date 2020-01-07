@@ -33,9 +33,7 @@ heat.scale <- function(zlim, col.heatmap, at=-10:10, labels=NULL, horiz=TRUE, ro
 	axis(side=ifelse(isTRUE(horiz), 1, 4), at=0, labels=ifelse(robust, "median", "mean"), las=1)
 	
 	# Title
-	if(isTRUE(horiz)) {
-		if(is.na(title)) title <- sprintf("Gene expression (in %s units)", unit)
-		mtext(side=ifelse(isTRUE(horiz), 3, 2), text=title, line=1)
-	}
+	if(is.na(title)) title <- sprintf("Gene expression (in %s units)", unit)
+	mtext(side=ifelse(isTRUE(horiz), 3, 2), text=title, line=1)
 }
 

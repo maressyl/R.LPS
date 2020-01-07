@@ -3,6 +3,7 @@
 \section{Changes in version 1.0.15 (2020-01-07)}{
   \itemize{
     \item{heat.scale() can now handle float and custom labels.}
+    \item{heat.scale() now prints the title also if horiz=FALSE.}
   }
 }
 \section{Changes in version 1.0.14 (2019-05-17)}{
