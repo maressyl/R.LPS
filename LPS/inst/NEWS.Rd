@@ -1,5 +1,10 @@
 \name{LPS-news}
 \title{LPS package NEWS}
+\section{Changes in version 1.0.15 (2020-01-07)}{
+  \itemize{
+    \item{heat.scale() can now handle float and custom labels.}
+  }
+}
 \section{Changes in version 1.0.14 (2019-05-17)}{
   \itemize{
     \item{heat.map() side color palette fixed when there are 8 classes.}

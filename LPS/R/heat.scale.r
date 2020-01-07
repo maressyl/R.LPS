@@ -1,6 +1,6 @@
 # Draws a heatmap scale for legend
 # Author : Sylvain Mareschal <maressyl@gmail.com>
-heat.scale <- function(zlim, col.heatmap, at=-10:10, horiz=TRUE, robust=FALSE, customMar=FALSE, title=NA) {
+heat.scale <- function(zlim, col.heatmap, at=-10:10, labels=NULL, horiz=TRUE, robust=FALSE, customMar=FALSE, title=NA) {
 	missing(zlim)
 	missing(col.heatmap)
 	
@@ -27,8 +27,9 @@ heat.scale <- function(zlim, col.heatmap, at=-10:10, horiz=TRUE, robust=FALSE, c
 	}
 	
 	# Legend
-	at <- at[ at != 0 ]
-	axis(side=ifelse(isTRUE(horiz), 1, 4), at=at, labels=sprintf("%+i%s", at, ifelse(isTRUE(horiz), "", sprintf(" %s", unit))), las=1)
+	at <- at[ at != 0L ]
+	if(is.null(labels)) labels <- sprintf("%+g%s", at, ifelse(isTRUE(horiz), "", sprintf(" %s", unit)))
+	axis(side=ifelse(isTRUE(horiz), 1, 4), at=at, labels=labels, las=1)
 	axis(side=ifelse(isTRUE(horiz), 1, 4), at=0, labels=ifelse(robust, "median", "mean"), las=1)
 	
 	# Title

@@ -9,8 +9,8 @@
 }
 
 \usage{
-  heat.scale(zlim, col.heatmap, at = -10:10, horiz = TRUE, robust = FALSE,
-    customMar = FALSE, title=NA)
+  heat.scale(zlim, col.heatmap, at = -10:10, labels = NULL, horiz = TRUE,
+    robust = FALSE, customMar = FALSE, title=NA)
 }
 
 \arguments{
@@ -22,6 +22,9 @@
 }
   \item{at}{
     Numeric vector, values shown in the axis.
+}
+  \item{labels}{
+    Character vector as long as \code{at}, defining the values to show at \code{at}.
 }
   \item{horiz}{
     Single logical value, whether to plot an horizontal or a vertical scale.
