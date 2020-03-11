@@ -3,6 +3,11 @@ LPS
 
 R package implementing the Linear Predictor Score model, and enhanced heat maps.
 
+![Github version](https://bioinformatics.ovsa.fr/badge.php?package=LPS)
+![CRAN version](https://www.r-pkg.org/badges/version-ago/LPS)
+![CRAN total downloads](https://cranlogs.r-pkg.org/badges/grand-total/LPS)
+![CRAN monthly downloads](https://cranlogs.r-pkg.org/badges/LPS)
+
 
 Availability
 ------------
