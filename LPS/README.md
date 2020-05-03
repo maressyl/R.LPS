@@ -18,8 +18,8 @@ A short presentation of the project can be found on my personnal website.
 
 Release sources and builds can be found in the CRAN repository :
 
-* **WWW** : http://cran.r-project.org/web/packages/LPS/index.html
-* **R**   : install.packages("LPS")
+* **WWW** : https://CRAN.R-project.org/package=LPS
+* **R**   : `install.packages("LPS")`
 
 Development sources are freely available on GitHub :
 
