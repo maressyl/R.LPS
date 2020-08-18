@@ -11,16 +11,17 @@
   \describe{
     \item{numeric}{are attributed grey shades from the minimum to the maximum, which are provided in the legend}
 	\item{factor}{have their levels attributed colors using a default or custom palette. Hexadecimal color codes starting with \code{#} and color names known by R are used "as is".}
-	\item{character}{are printed as is in a blank cell.}
+	\item{character}{are printed as is in a blank cell. Hexadecimal color codes starting with \code{#} and color names known by R are used as background colors instead of text.}
+	\item{logical}{are ploted in dark (TRUE) or light (FALSE) gray, leaving NAs in white.}
   }
 }
 
 \usage{
   heat.map(expr, side = NULL, cex.col = NA, cex.row = NA, mai.left = NA,
     mai.bottom = NA, mai.right = 0.1, mai.top = 0.1, side.height = 1, side.col = NULL,
-    side.srt = 0, col.heatmap = heat(), zlim = "0 centered", zlim.trim = 0.02,
-    norm = c("rows", "columns", "none"), norm.robust = FALSE, customLayout = FALSE,
-    getLayout = FALSE, font = c(1, 3), xaxt = "s", yaxt = "s")
+    side.srt = 0, side.cex = 1, col.heatmap = heat(), zlim = "0 centered",
+	zlim.trim = 0.02, norm = c("rows", "columns", "none"), norm.robust = FALSE,
+	customLayout = FALSE, getLayout = FALSE, font = c(1, 3), xaxt = "s", yaxt = "s")
 }
 
 \arguments{
@@ -55,7 +56,10 @@
     A function returning as many colors as requested by its sole argument, defining the colors to be used for \code{side} legend. Default uses a custom palette for few values, and a derivative of \code{\link{rainbow}} if more than 8 colors are needed.
 }
   \item{side.srt}{
-    A single numeric value, determining the string rotation angle when writing character side columns (default is 0, horizontal, 90 is suggested for vertical text on busy heat maps).
+    Single numeric value, determining the string rotation angle when writing character side columns (default is 0, horizontal, 90 is suggested for vertical text on busy heat maps).
+}
+  \item{side.cex}{
+    Single numeric value, the character expansion factor to use for character side columns.
 }
   \item{col.heatmap}{
     Character vector of colors, to be used for the cells of the heat map.

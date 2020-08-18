@@ -15,6 +15,7 @@ heat.map <- function(
 	side.height = 1,
 	side.col = NULL,
 	side.srt = 0,
+	side.cex = 1,
 	col.heatmap = heat(),
 	zlim = "0 centered",   # or "range", or numeric(2)
 	zlim.trim = 0.02,
@@ -106,7 +107,10 @@ heat.map <- function(
 			} else if(is.character(side[,k])) {
 				# Character will be printed as is
 				pal.side[[k]] <- character(0)
-			} else warning("Column \"", k, "\" type is not handled, ignored")
+			} else if(is.logical(side[,k])) {
+				# Logical will be printed with fixed colors
+				pal.side[[k]] <- character(0)
+			}else warning("Column \"", k, "\" type is not handled, ignored")
 		}
 	}
 
@@ -154,7 +158,7 @@ heat.map <- function(
 		plot(x=NA, y=NA, xlim=c(0.5, nrow(expr)+0.5), ylim=c(0, ncol(side)), xaxs="i", yaxs="i", xaxt="n", yaxt="n", xlab="", ylab="")
 		for(k in 1:ncol(side)) {
 			# Annotation colors
-			col <- side[[k]]
+			lab <- col <- side[[k]]
 			if(is.numeric(side[[k]])) {
 				# Represent numeric columns as grey shades
 				tmp <- rep(NA, length(col))
@@ -167,15 +171,20 @@ heat.map <- function(
 				col <- as.character(col)
 				col[!isCustom] <- pal.side[[k]][ as.character(col[!isCustom]) ]
 			} else if(is.character(side[[k]])) {
-				# Character
-				col <- NA
+				# Print text, or use hexadecimal codes / color name as is
+				isCustom <- grepl("^#([0-9A-Fa-f]{2}){3,4}$", col) | col %in% colors()
+				col[!isCustom] <- as.character(NA)
+				lab[ isCustom] <- as.character(NA)
+			} else if(is.logical(side[[k]])) {
+				# Logical
+				col <- ifelse(side[[k]], "#333333", "#BBBBBB")
 			}
 			
 			# Draws annotation boxes
 			rect(xleft=(1:nrow(expr))-0.5, xright=(1:nrow(expr))+0.5, ybottom=k-1L, ytop=k, col=col)
 			
 			# Character
-			if(is.character(side[[k]])) text(x=1:nrow(expr), y=k-0.5, labels=side[[k]], srt=side.srt, adj=c(0.5, 0.5), xpd=NA)
+			if(is.character(side[[k]])) text(x=1:nrow(expr), y=k-0.5, labels=lab, srt=side.srt, cex=side.cex, adj=c(0.5, 0.5), xpd=NA)
 			
 			# Add annotation title
 			if(!is.null(colnames(side))) mtext(side=2, at=k-0.5, text=colnames(side)[k], las=2, line=1)

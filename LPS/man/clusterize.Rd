@@ -17,11 +17,12 @@
 \usage{
   clusterize(expr, side = NULL, cex.col = NA, cex.row = NA, mai.left = NA,
     mai.bottom = NA, mai.right = 0.1, mai.top = 0.1, side.height = 1, side.col = NULL,
-    side.srt = 0, col.heatmap = heat(), zlim = "0 centered", zlim.trim = 0.02,
-    norm = c("rows", "columns", "none"), norm.clust = TRUE, norm.robust = FALSE,
-    customLayout = FALSE, getLayout = FALSE, plot = TRUE, widths = c(1, 4),
-    heights = c(1, 4), order.genes = NULL, order.samples = NULL, fun.dist = dist.COR,
-    fun.hclust = hclust.ward, clust.genes = NULL, clust.samples = NULL)
+    side.srt = 0, side.cex = 1, col.heatmap = heat(), zlim = "0 centered",
+	zlim.trim = 0.02, norm = c("rows", "columns", "none"), norm.clust = TRUE,
+	norm.robust = FALSE, customLayout = FALSE, getLayout = FALSE, plot = TRUE,
+	widths = c(1, 4), heights = c(1, 4), order.genes = NULL, order.samples = NULL,
+	fun.dist = dist.COR, fun.hclust = hclust.ward, clust.genes = NULL,
+	clust.samples = NULL)
   dist.COR(input)
   hclust.ward(input)
 }
@@ -58,6 +59,9 @@
     To be passed to \code{\link{heat.map}}.
 }
   \item{side.srt}{
+    To be passed to \code{\link{heat.map}}.
+}
+  \item{side.cex}{
     To be passed to \code{\link{heat.map}}.
 }
   \item{col.heatmap}{

@@ -12,6 +12,7 @@ clusterize <- function(
 	side.height = 1,                       # heat.map()
 	side.col = NULL,                       # heat.map()
 	side.srt = 0,                          # heat.map()
+	side.cex = 1,                          # heat.map()
 	col.heatmap = heat(),                  # heat.map()
 	zlim = "0 centered",                   # heat.map()
 	zlim.trim = 0.02,                      # heat.map()
@@ -116,6 +117,7 @@ clusterize <- function(
 			side.height = side.height,
 			side.col = side.col,
 			side.srt = side.srt,
+			side.cex = side.cex,
 			col.heatmap = col.heatmap,
 			zlim = zlim,
 			zlim.trim = zlim.trim,
