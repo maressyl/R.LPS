@@ -14,6 +14,7 @@ heat.map <- function(
 	mai.top = 0.1,
 	side.height = 1,
 	side.col = NULL,
+	side.srt = 0,
 	col.heatmap = heat(),
 	zlim = "0 centered",   # or "range", or numeric(2)
 	zlim.trim = 0.02,
@@ -75,15 +76,14 @@ heat.map <- function(
 				if(any(is.na(side[[k]]))) {
 					pal.side[[k]] <- c(pal.side[[k]], "NA"="#880000")
 				}
-			} else {
+			} else if(is.factor(side[,k])) {
 				# Unique values (ignore custom colors and numeric columns)
-				if(is.factor(side[,k])) {
-					val <- levels(side[,k])
-					side[,k] <- as.character(side[,k])
-				} else {
-					val <- unique(as.character(side[,k]))
-					val <- sort(val[ !is.na(val) & !grepl("^#([0-9A-Fa-f]{2}){3,4}$", val) ])
-				}
+				val <- levels(side[,k])
+				
+				# Do not attribute colors to interpretable color names or codes
+				val <- val[ !is.na(val) ]
+				val <- grep("^#([0-9A-Fa-f]{2}){3,4}$", val, value=TRUE, invert=TRUE)
+				val <- setdiff(val, colors())
 				
 				# Attribute colors to values
 				if(length(val) > 0) {
@@ -103,7 +103,9 @@ heat.map <- function(
 					# Empty legend (if only custom colors are provided)
 					pal.side[[k]] <- character(0)
 				}
-			}
+			} else if(is.character(side[,k])) {
+				# Character will be printed as is
+			} else warning("Column \"", k, "\" type is not handled, ignored")
 		}
 	}
 
@@ -152,20 +154,27 @@ heat.map <- function(
 		for(k in 1:ncol(side)) {
 			# Annotation colors
 			col <- side[[k]]
-			if(is.numeric(col)) {
+			if(is.numeric(side[[k]])) {
 				# Represent numeric columns as grey shades
 				tmp <- rep(NA, length(col))
 				tmp[  is.na(col) ] <- "#880000"
 				tmp[ !is.na(col) ] <- colorize(col[ !is.na(col) ])
 				col <- tmp
-			} else {
-				# Use palette, or hexadecimal codes as is
-				isCustom <- grepl("^#([0-9A-Fa-f]{2}){3,4}$", col)
+			} else if(is.factor(side[[k]])) {
+				# Use palette, or hexadecimal codes / color name as is
+				isCustom <- grepl("^#([0-9A-Fa-f]{2}){3,4}$", col) | col %in% colors()
+				col <- as.character(col)
 				col[!isCustom] <- pal.side[[k]][ as.character(col[!isCustom]) ]
+			} else if(is.character(side[[k]])) {
+				# Character
+				col <- NA
 			}
 			
 			# Draws annotation boxes
 			rect(xleft=(1:nrow(expr))-0.5, xright=(1:nrow(expr))+0.5, ybottom=k-1L, ytop=k, col=col)
+			
+			# Character
+			if(is.character(side[[k]])) text(x=1:nrow(expr), y=k-0.5, labels=side[[k]], srt=side.srt, adj=c(0.5, 0.5), xpd=NA)
 			
 			# Add annotation title
 			if(!is.null(colnames(side))) mtext(side=2, at=k-0.5, text=colnames(side)[k], las=2, line=1)

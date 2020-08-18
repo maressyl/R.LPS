@@ -1,8 +1,8 @@
 Package: LPS
 Type: Package
 Title: Linear Predictor Score, for Binary Inference from Multiple Continuous Variables
-Version: 1.0.15
-Date: 2020-01-07
+Version: 1.0.16
+Date: 2020-08-18
 Author: Sylvain Mareschal
 Maintainer: Sylvain Mareschal <maressyl@gmail.com>
 URL: http://bioinformatics.ovsa.fr/LPS

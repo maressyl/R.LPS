@@ -11,6 +11,7 @@ clusterize <- function(
 	mai.top = 0.1,                         # heat.map()
 	side.height = 1,                       # heat.map()
 	side.col = NULL,                       # heat.map()
+	side.srt = 0,                          # heat.map()
 	col.heatmap = heat(),                  # heat.map()
 	zlim = "0 centered",                   # heat.map()
 	zlim.trim = 0.02,                      # heat.map()
@@ -114,6 +115,7 @@ clusterize <- function(
 			side = side,
 			side.height = side.height,
 			side.col = side.col,
+			side.srt = side.srt,
 			col.heatmap = col.heatmap,
 			zlim = zlim,
 			zlim.trim = zlim.trim,
@@ -134,7 +136,7 @@ clusterize <- function(
 		}
 		
 		# Legend (top+middle left)
-		if(length(out$legend) > 0) {
+		if(length(unlist(out$legend)) > 0) {
 			par(mai=c(0.1, 0.1, mai.top, 0.1), xpd=NA)
 			plot(x=NA, y=NA, xlim=0:1, ylim=0:1, xaxt="n", yaxt="n", xaxs="i", yaxs="i", bty="n", xlab="", ylab="")
 			val <- paste(rep(names(rev(out$legend)), sapply(rev(out$legend), length)), unlist(lapply(rev(out$legend), names)), sep=" : ")

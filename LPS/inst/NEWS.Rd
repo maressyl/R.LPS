@@ -1,5 +1,10 @@
 \name{LPS-news}
 \title{LPS package NEWS}
+\section{Changes in version 1.0.16 (2020-08-18)}{
+  \itemize{
+    \item{heat.map() and clusterize() now print character annotation as text, only factors are attributed colors.}
+  }
+}
 \section{Changes in version 1.0.15 (2020-01-07)}{
   \itemize{
     \item{heat.scale() can now handle float and custom labels.}
