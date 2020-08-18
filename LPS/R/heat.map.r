@@ -105,6 +105,7 @@ heat.map <- function(
 				}
 			} else if(is.character(side[,k])) {
 				# Character will be printed as is
+				pal.side[[k]] <- character(0)
 			} else warning("Column \"", k, "\" type is not handled, ignored")
 		}
 	}
