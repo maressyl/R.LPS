@@ -46,5 +46,5 @@ Individual commits can be followed on GitHub (see 'Availability').
 Credits
 ---------
 
-Sylvain Mareschal <<maressyl@gmail.com>>
+Sylvain Mareschal <<mareschal@ovsa.fr>>
 

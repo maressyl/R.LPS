@@ -1,5 +1,4 @@
 # Color palette generation for heatmap (2 border + 1 center colors, symetric biases)
-# Author : Sylvain Mareschal <maressyl@gmail.com>
 heat.lin <- function(n, part) {
 	shape <- 0:(n-1)
 	return(shape)	

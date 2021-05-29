@@ -1,5 +1,4 @@
 # Draws a heatmap scale for legend
-# Author : Sylvain Mareschal <maressyl@gmail.com>
 heat.scale <- function(zlim, col.heatmap, at=-10:10, labels=NULL, horiz=TRUE, robust=FALSE, customMar=FALSE, title=NA) {
 	missing(zlim)
 	missing(col.heatmap)

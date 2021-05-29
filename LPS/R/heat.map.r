@@ -2,7 +2,6 @@
 colorize <- function(x) grey(1L - (x - min(x)) / (max(x) - min(x)))
 
 # Mix image() and heatmap(), with multiple row annotation and distinct default values
-# Author : Sylvain Mareschal <maressyl@gmail.com>
 heat.map <- function(
 	expr,
 	side = NULL,

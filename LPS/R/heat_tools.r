@@ -1,5 +1,4 @@
 # Distances : 1 - Pearson (time efficient implementation)
-# Author : Sylvain Mareschal <maressyl@gmail.com>
 dist.COR <- function(input) {
 	# Distance matrix
 	mtx <- 1 - cor(t(input), method="pearson", use="na.or.complete")
@@ -19,7 +18,6 @@ dist.COR <- function(input) {
 }
 
 # Agglomeration : Ward
-# Author : Sylvain Mareschal <maressyl@gmail.com>
 hclust.ward <- function(input) {
 	hclust(input, method="ward")
 }

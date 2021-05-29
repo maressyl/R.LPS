@@ -1,5 +1,4 @@
-## Linear Predictor Score plot
-## Author : Sylvain Mareschal <maressyl@gmail.com>
+# Linear Predictor Score plot
 plot.LPS <- function(
 		x,
 		y,

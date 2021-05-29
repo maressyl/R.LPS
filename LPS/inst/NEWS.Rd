@@ -1,5 +1,10 @@
 \name{LPS-news}
 \title{LPS package NEWS}
+\section{Changes in version 1.0.17 (2021-05-29)}{
+  \itemize{
+    \item{Contact email changed.}
+  }
+}
 \section{Changes in version 1.0.16 (2021-05-29)}{
   \itemize{
     \item{Minor fixes for CRAN submission.}

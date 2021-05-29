@@ -1,5 +1,4 @@
-## Linear Predictor Score formula builders
-## Author : Sylvain Mareschal <maressyl@gmail.com>
+# Linear Predictor Score formula builders
 
 LPS.p.form <- function(responseName, p.values, threshold=0.05, method="fdr") {
 	# p-value threshold

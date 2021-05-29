@@ -1,6 +1,5 @@
-## Variable extraction from large formulas (more efficient than terms.formula)
-## '...' can notably contain "backtick=TRUE"
-## Author : Sylvain Mareschal <maressyl@gmail.com>
+# Variable extraction from large formulas (more efficient than terms.formula)
+# '...' can notably contain "backtick=TRUE"
 var.formula <- function(formula, asCall=FALSE, ...) {
 	# Checks
 	if(!is(formula, "formula")) stop("'formula' must be a formula object")

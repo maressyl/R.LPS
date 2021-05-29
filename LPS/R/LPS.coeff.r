@@ -1,5 +1,4 @@
-## Linear Predictor Score fast coefficient computation
-## Author : Sylvain Mareschal <maressyl@gmail.com>
+# Linear Predictor Score fast coefficient computation
 LPS.coeff <- function(data, response, formula=~1, type=c("t", "limma"), p.value=TRUE, log=FALSE, weighted=FALSE, ...) {
 	# Checks
 	type <- match.arg(type)

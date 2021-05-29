@@ -1,5 +1,4 @@
-## Linear Predictor Score prediction
-## Author : Sylvain Mareschal <maressyl@gmail.com>
+# Linear Predictor Score prediction
 rain <- function(n) rainbow(n, v=0.8)
 excl <- function(n) c("#FFCC00", "#333399", "#993333", "#66CC00", "#CC99FF", "#000000", "#FFFFFF", "#99CCFF")[1:n]
 predict.LPS <- function(

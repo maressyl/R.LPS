@@ -1,5 +1,4 @@
 # Draws a survival scale for legend
-# Author : Sylvain Mareschal <maressyl@gmail.com>
 surv.scale <- function(time, event, eventColors=c("#000000", "#CCCCCC"), censColors=c("#FFFFEE", "#FFDD00")) {
 	# Layout
 	layout(matrix(1:2, ncol=1))

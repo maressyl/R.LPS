@@ -1,5 +1,4 @@
 # Similar to heatmap()
-# Author : Sylvain Mareschal <maressyl@gmail.com>
 clusterize <- function(
 	expr,                                  # heat.map()
 	side = NULL,                           # heat.map()

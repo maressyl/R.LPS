@@ -1,5 +1,4 @@
-## Linear Predictor Score fitting
-## Author : Sylvain Mareschal <maressyl@gmail.com>
+# Linear Predictor Score fitting
 LPS <- function(data, coeff, response, k, threshold, formula, method="fdr", ...) {
 	# Checks
 	if(!is.matrix(coeff) || !is.numeric(coeff))                         stop("'coeff' must be a numeric matrix")
